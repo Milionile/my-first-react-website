@@ -1,8 +1,10 @@
 
-import Message from './Message.tsx'
+
+
 
 function App() {
-  return <div><Message /></div>
+
+  return <div></div>
 }
 
 export default App;

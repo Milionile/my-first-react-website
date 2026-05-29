@@ -37,9 +37,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 left-0 right-0 h-auto z-10 transition-all duration-300 bg-surface border-b border-white/10 py-4 shadow-lg shadow-black/20">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between w-full">
+    <nav className="sticky top-0 left-0 right-0 z-50 bg-surface border-b border-white/10 shadow-lg shadow-black/20 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 lg:h-24">
+          
           {/* Logo Brand */}
           <div 
             onClick={() => navigate('/')} 
@@ -60,13 +61,13 @@ export default function Navbar() {
             </div>
           </div>
           
-          {/* Desktop Navigation - Hidden on md, reveals at lg */}
-          <div className="hidden lg:flex items-center gap-6">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-6 h-full">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.label}
                 onClick={() => handleNavigation(link)}
-                className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer"
+                className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer py-2"
               >
                 {link.label}
               </button>
@@ -74,36 +75,39 @@ export default function Navbar() {
 
             {/* Solutions Dropdown Menu */}
             <div
-              className="relative py-2"
+              className="relative flex items-center h-full"
               onMouseEnter={() => setOpenDropdown('services')}
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <button
                 type="button"
                 onClick={() => navigate('/OurSolution')}
-                className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer flex items-center gap-1.5"
+                className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer flex items-center gap-1.5 py-2"
               >
                 <span>Our Solutions</span>
                 <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${openDropdown === 'services' ? 'rotate-180' : ''}`} />
               </button>
 
               {openDropdown === 'services' && (
-                <div className="absolute right-0 top-full w-64 mt-1 bg-surface border border-white/10 shadow-2xl z-50 py-1">
-                  {SOLUTION_LINKS.map((sol) => (
-                    <button
-                      key={sol.label}
-                      onClick={() => handleNavigation(sol)}
-                      className="block w-full px-4 py-2.5 text-left text-[11px] font-medium uppercase tracking-wider text-neutral hover:bg-white/5 hover:text-primary transition-colors border-b border-white/5 last:border-none"
-                    >
-                      {sol.label}
-                    </button>
-                  ))}
+                /* The pt-2 creates an invisible bridge element over the layout gap to maintain focus */
+                <div className="absolute top-[80%] right-0 w-64 pt-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="bg-surface border border-white/10 shadow-2xl py-1 backdrop-blur-md">
+                    {SOLUTION_LINKS.map((sol) => (
+                      <button
+                        key={sol.label}
+                        onClick={() => handleNavigation(sol)}
+                        className="block w-full px-4 py-2.5 text-left text-[11px] font-medium uppercase tracking-wider text-neutral hover:bg-white/5 hover:text-primary transition-colors border-b border-white/5 last:border-none cursor-pointer"
+                      >
+                        {sol.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Mobile/Tablet Menu Trigger - Visible until lg */}
+          {/* Mobile/Tablet Menu Trigger */}
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -116,7 +120,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile/Tablet Drawer - Operates up to lg variant */}
+      {/* Mobile/Tablet Drawer */}
       {isOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-surface border-b border-white/10 px-4 py-6 space-y-6 shadow-2xl max-h-[calc(100vh-5rem)] overflow-y-auto">
           <div className="flex flex-col space-y-2">
@@ -133,7 +137,7 @@ export default function Navbar() {
             {/* Solutions Mobile Group */}
             <div className="pt-2 pb-4 border-b border-white/5">
               <div className="text-secondary/60 text-[10px] uppercase tracking-widest font-black mb-2 px-1">
-                Our Solutions -
+                Our Solutions
               </div>
               <div className="space-y-1 pl-2">
                 {SOLUTION_LINKS.map((sol) => (

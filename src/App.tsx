@@ -3,13 +3,13 @@ import Navbar from '@/components/NavBar';
 import GetInTouch from '@/pages/GetInTouch';
 import HomePage from '@/pages/home';
 import Blog from '@/pages/Blog';
-import CyberSecurity from './pages/CyberSecurity';
-import NetworkInfrastructure from './pages/NetworkInfrastructure';
-import OurServices from './pages/OurServices';
-import OurSolution from './pages/OurSolution';
-import UnifiedCommunication from './pages/UnifiedCommunication';
-import Surveillance from './pages/Surveillance';
-import SSLD from './pages/SSLD';
+import CyberSecurity from '@/pages/CyberSecurity';
+import NetworkInfrastructure from '@/pages/NetworkInfrastructure';
+import OurServices from '@/pages/OurServices';
+import OurSolution from '@/pages/OurSolution';
+import UnifiedCommunication from '@/pages/UnifiedCommunication';
+import Surveillance from '@/pages/Surveillance';
+import SSLD from '@/pages/SSLD';
 
 function App() {
   return (

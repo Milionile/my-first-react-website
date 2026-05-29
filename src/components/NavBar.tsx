@@ -3,7 +3,7 @@ import { Menu, X, Server, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const SOLUTION_LINKS = [
-  { label: 'Unified Communication', path: '/unified-communication' },
+  { label: 'Unified Communication', path: '/UnifiedCommunication' },
   { label: 'Network Infrastructure', section: 'casestudies' },
   { label: 'Cybersecurity', section: 'faq' },
   { label: 'Storage, Servers, Laptops & Desktops', section: 'faq' },

@@ -16,7 +16,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 h-auto z-50 transition-all duration-300 bg-surface border-b border-white/10 py-4 shadow-lg shadow-black/20">
+    <nav className="sticky top-0 left-0 right-0 h-auto z-10 transition-all duration-300 bg-surface border-b border-white/10 py-4 shadow-lg shadow-black/20">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between w-full">
           {/* Logo Brand */}

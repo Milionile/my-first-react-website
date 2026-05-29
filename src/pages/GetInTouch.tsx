@@ -4,7 +4,7 @@ export default function GetInTouch() {
       <p className="mb-4 text-sm uppercase tracking-[0.35em] text-primary">Contact</p>
       <h1 className="text-4xl font-black tracking-tight text-white md:text-5xl">Get in touch</h1>
       <p className="mt-6 text-lg text-slate-200">
-        This page is now a real route. You can add your contact form, phone number, email, and service details here.
+        TEST This page is now a real route. You can add your contact form, phone number, email, and service details here.
       </p>
     </section>
   );

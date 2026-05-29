@@ -18,18 +18,17 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 h-auto z-50 transition-all duration-300 bg-surface border-b border-white/10 py-4 shadow-lg shadow-black/20">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center w-full">
+        <div className="flex items-center justify-between w-full">
           {/* Logo Brand */}
           <div 
             onClick={() => navigate('/')} 
             
-            className="flex items-center space-x-3 cursor-pointer group "
+            className="flex items-center space-x-3 cursor-pointer group flex-shrink-0"
           >
             <img
               src="/NEW LOGO2.png"
               alt="C3E IT logo"
-              className="mr-auto h-20 w-auto object-contain"
-              style={{ float: 'left' }}
+              className="h-20 w-auto object-contain"
             />
             <div>
               <span className="font-mono font-black text-xl tracking-tight text-white block">
@@ -40,9 +39,11 @@ export default function Navbar() {
               </span>
             </div>
           </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-7 ml-auto gap-5">
+          
+          {/* Navigation Wrapper - Right Side */}
+          <div className="flex items-center gap-5">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-5">
             <button
               onClick={() => navigate('/')}
               className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer"
@@ -136,15 +137,6 @@ export default function Navbar() {
               Disclosures
             </button>
             <div className="h-4 w-px bg-dark" />
-            
-            
-
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="px-5 py-2.5 border border-primary/60 text-primary text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-dark transition-all rounded-none cursor-pointer"
-            >
-              Consultation
-            </button>
           </div>
 
           {/* Mobile Menu Trigger */}
@@ -156,6 +148,7 @@ export default function Navbar() {
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
+          </div>
           </div>
         </div>
       </div>

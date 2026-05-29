@@ -62,7 +62,7 @@ export default function Navbar() {
               <button
                 id="dropdown-trigger"
                 type="button"
-                onClick={() => navigate('/Our-Solution')}
+                onClick={() => navigate('/OurSolution')}
                 className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer flex items-center gap-1.5"
               >
                 <span>Our Solutions</span>

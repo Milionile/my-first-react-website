@@ -1,201 +1,163 @@
 import { useState } from 'react';
-import { Menu, X, Server } from 'lucide-react';
+import { Menu, X, Server, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
+const SOLUTION_LINKS = [
+  { label: 'Unified Communication', path: '/unified-communication' },
+  { label: 'Network Infrastructure', section: 'casestudies' },
+  { label: 'Cybersecurity', section: 'faq' },
+  { label: 'Storage, Servers, Laptops & Desktops', section: 'faq' },
+  { label: 'Surveillance', section: 'faq' },
+];
+
+const NAV_LINKS = [
+  { label: 'About Us', path: '/' },
+  { label: 'Services', section: '' },
+  { label: 'Past Projects', section: 'casestudies' },
+  { label: 'Get In Touch', section: 'faq' },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const scrollToSection = (id: string) => {
+  const handleNavigation = (link: { path?: string; section?: string }) => {
     setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    setOpenDropdown(null);
+
+    if (link.path) {
+      navigate(link.path);
+    } else if (typeof link.section === 'string') {
+      const element = document.getElementById(link.section);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 h-auto z-50 transition-all duration-300 bg-surface border-b border-white/10 py-4 shadow-lg shadow-black/20">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between w-full">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-white/10 shadow-lg shadow-black/20 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Adjusted height slightly for a balanced look across breakpoints */}
+        <div className="flex items-center justify-between h-20 lg:h-24">
+          
           {/* Logo Brand */}
           <div 
             onClick={() => navigate('/')} 
-            
-            className="flex items-center space-x-3 cursor-pointer group flex-shrink-0"
+            className="flex items-center space-x-3 cursor-pointer group flex-shrink-0 select-none"
           >
             <img
               src="/NEW LOGO2.png"
               alt="C3E IT logo"
-              className="h-20 w-auto object-contain"
+              className="h-12 lg:h-16 w-auto object-contain transition-all"
             />
-            <div>
-              <span className="font-mono font-black text-xl tracking-tight text-white block">
-                C3E Information Technology<span className="text-secondary"></span>
+            <div className="flex flex-col justify-center">
+              <span className="font-mono font-black text-sm lg:text-lg tracking-tight text-white uppercase leading-none">
+                C3E Information Technology
               </span>
-              <span className="font-mono text-[20 px] text-secondary tracking-widest block -mt-1 font-bold uppercase">
+              <span className="font-mono text-[11px] lg:text-sm font-bold tracking-widest text-secondary uppercase mt-1 leading-none">
                 Services
               </span>
             </div>
           </div>
           
-          {/* Navigation Wrapper - Right Side */}
-          <div className="flex items-center gap-5">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-5">
-            <button
-              onClick={() => navigate('/')}
-              className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer"
-            >
-              About Us
-            </button>
+          {/* Desktop Navigation - Hidden on md, reveals at lg */}
+          <div className="hidden lg:flex items-center gap-6">
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.label}
+                onClick={() => handleNavigation(link)}
+                className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer"
+              >
+                {link.label}
+              </button>
+            ))}
+
+            {/* Solutions Dropdown Menu */}
             <div
-              className="relative"
+              className="relative py-2"
               onMouseEnter={() => setOpenDropdown('services')}
-              onMouseLeave={(e) => {
-                const next = e.relatedTarget as Node | null;
-                if (!e.currentTarget.contains(next)) {
-                  setOpenDropdown(null);
-                }
-              }}
+              onMouseLeave={() => setOpenDropdown(null)}
             >
               <button
-                id="dropdown-trigger"
                 type="button"
                 onClick={() => navigate('/OurSolution')}
                 className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer flex items-center gap-1.5"
               >
                 <span>Our Solutions</span>
-                <span className="text-[10px]">▾</span>
+                <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${openDropdown === 'services' ? 'rotate-180' : ''}`} />
               </button>
 
               {openDropdown === 'services' && (
-                <div
-                  className="absolute left-0 top-full w-56 rounded-none border border-white/10 bg-surface py-2 shadow-2xl z-50"
-                  onMouseEnter={() => setOpenDropdown('services')}
-                  onMouseLeave={(e) => {
-                    const next = e.relatedTarget as Node | null;
-                    if (!e.currentTarget.parentElement?.contains(next)) {
-                      setOpenDropdown(null);
-                    }
-                  }}
-                >
-                  <button
-                    onClick={() => { setOpenDropdown(null); navigate('/unified-communication'); }}
-                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary wrap-normal"
-                  >
-                    Unified Communication
-                  </button>
-                  <button
-                    onClick={() => { setOpenDropdown(null); scrollToSection('casestudies'); }}
-                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary"
-                  >
-                    Network Infrastructure
-                  </button>
-                  <button
-                    onClick={() => { setOpenDropdown(null); scrollToSection('faq'); }}
-                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary"
-                  >
-                    Cybersecurity
-                  </button>
-                  <button
-                    onClick={() => { setOpenDropdown(null); scrollToSection('faq'); }}
-                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary"
-                  >
-                    Storage, Servers, Laptops And Desktops
-                  </button>
-                  <button
-                    onClick={() => { setOpenDropdown(null); scrollToSection('faq'); }}
-                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary"
-                  >
-                    Surveillance
-                  </button>
+                <div className="absolute right-0 top-full w-64 mt-1 bg-surface border border-white/10 shadow-2xl z-50 py-1">
+                  {SOLUTION_LINKS.map((sol) => (
+                    <button
+                      key={sol.label}
+                      onClick={() => handleNavigation(sol)}
+                      className="block w-full px-4 py-2.5 text-left text-[11px] font-medium uppercase tracking-wider text-neutral hover:bg-white/5 hover:text-primary transition-colors border-b border-white/5 last:border-none"
+                    >
+                      {sol.label}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
-
-            
-            <button
-              onClick={() => scrollToSection('')}
-              className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer flex items-center gap-1.5"
-            >
-              
-                Services
-                
-            </button>
-            <button
-              onClick={() => scrollToSection('casestudies')}
-              className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer"
-            >
-              Success Logs
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
-              className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer"
-            >
-              Disclosures
-            </button>
-            <div className="h-4 w-px bg-dark" />
           </div>
 
-          {/* Mobile Menu Trigger */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile/Tablet Menu Trigger - Visible until lg */}
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-200 hover:text-primary p-2 border border-white/10 rounded-none cursor-pointer transition-colors"
+              className="p-2 text-slate-200 hover:text-primary border border-white/10 transition-colors cursor-pointer"
               aria-label="Toggle Menu"
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
-          </div>
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile/Tablet Drawer - Operates up to lg variant */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-surface border-b border-white/10 px-4 py-6 space-y-4 shadow-2xl">
-          <div className="flex flex-col space-y-4 text-left">
-            <button
-              onClick={() => navigate('/')}
-              className="py-2 text-neutral hover:text-primary font-bold text-xs uppercase tracking-widest border-b border-dark cursor-pointer"
-            >
-              About Us
-            </button>
-            <button
-              onClick={() => scrollToSection('calculator')}
-              className="py-2 text-neutral hover:text-primary font-bold text-xs uppercase tracking-widest border-b border-dark flex justify-between items-center cursor-pointer"
-            >
-              <span>SLA Calculator</span>
-              <span className="text-[10px] bg-accent/10 text-accent px-2 py-0.5 rounded-none font-mono tracking-normal">KPI</span>
-            </button>
-            <button
-              onClick={() => scrollToSection('casestudies')}
-              className="py-2 text-neutral hover:text-primary font-bold text-xs uppercase tracking-widest border-b border-dark cursor-pointer"
-            >
-              Success Logs
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
-              className="py-2 text-neutral hover:text-primary font-bold text-xs uppercase tracking-widest border-b border-dark cursor-pointer"
-            >
-              Disclosures
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="py-2 text-secondary hover:text-accent font-bold text-xs uppercase tracking-widest cursor-pointer"
-            >
-              Consultation
-            </button>
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-surface border-b border-white/10 px-4 py-6 space-y-6 shadow-2xl max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="flex flex-col space-y-2">
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.label}
+                onClick={() => handleNavigation(link)}
+                className="w-full text-left py-3 text-neutral hover:text-primary font-bold text-xs uppercase tracking-widest border-b border-white/5 cursor-pointer"
+              >
+                {link.label}
+              </button>
+            ))}
+            
+            {/* Solutions Mobile Group */}
+            <div className="pt-2 pb-4 border-b border-white/5">
+              <div className="text-secondary/60 text-[10px] uppercase tracking-widest font-black mb-2 px-1">
+                Our Solutions
+              </div>
+              <div className="space-y-1 pl-2">
+                {SOLUTION_LINKS.map((sol) => (
+                  <button
+                    key={sol.label}
+                    onClick={() => handleNavigation(sol)}
+                    className="block w-full text-left py-2.5 text-neutral hover:text-primary font-semibold text-xs uppercase tracking-wider cursor-pointer"
+                  >
+                    • {sol.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="bg-surface border border-white/10 p-4 rounded-none flex items-center justify-between">
+          {/* SLA Badge Container */}
+          <div className="bg-white/[0.02] border border-white/5 p-4 flex items-center justify-between">
             <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-wider text-primary">
               <Server className="h-4 w-4 text-secondary" />
-              <span>SLA response check: <strong className="text-white">Active</strong></span>
+              <span>SLA response check: <strong className="text-white font-bold">Active</strong></span>
             </div>
-            <span className="text-[10px] font-mono bg-accent/10 text-accent px-2.5 py-1 rounded-none">
+            <span className="text-[10px] font-mono bg-white/10 text-white px-2.5 py-1 uppercase tracking-wider">
               Guaranteed
             </span>
           </div>
@@ -203,4 +165,4 @@ export default function Navbar() {
       )}
     </nav>
   );
-} 
+}

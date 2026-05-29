@@ -1,23 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Menu, X, Server } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToSection = (id: string) => {
     setIsOpen(false);
@@ -28,44 +16,111 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-surface/95 border-b border-white/10 py-4 shadow-lg shadow-black/20{}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 h-auto z-50 transition-all duration-300 bg-surface border-b border-white/10 py-4 shadow-lg shadow-black/20">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center w-full">
           {/* Logo Brand */}
           <div 
             onClick={() => navigate('/')} 
-            className="flex items-center space-x-3 cursor-pointer group"
+            
+            className="flex items-center space-x-3 cursor-pointer group "
           >
             <img
-              src="/Logo2.png"
+              src="/NEW LOGO2.png"
               alt="C3E IT logo"
-              className="ml-0 h-10 w-auto object-contain"
+              className="mr-auto h-20 w-auto object-contain"
+              style={{ float: 'left' }}
             />
             <div>
-              <span className="font-sans font-black text-xl tracking-tight text-white block">
-                C3E IT<span className="text-secondary"></span>
+              <span className="font-mono font-black text-xl tracking-tight text-white block">
+                C3E Information Technology<span className="text-secondary"></span>
               </span>
-              <span className="font-mono text-[9px] text-secondary tracking-widest block -mt-1 font-bold uppercase">
+              <span className="font-mono text-[20 px] text-secondary tracking-widest block -mt-1 font-bold uppercase">
                 Services
               </span>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-7 ml-auto gap-5">
             <button
               onClick={() => navigate('/')}
               className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer"
             >
               About Us
             </button>
+            <div
+              className="relative"
+              onMouseEnter={() => setOpenDropdown('services')}
+              onMouseLeave={(e) => {
+                const next = e.relatedTarget as Node | null;
+                if (!e.currentTarget.contains(next)) {
+                  setOpenDropdown(null);
+                }
+              }}
+            >
+              <button
+                id="dropdown-trigger"
+                type="button"
+                onClick={() => navigate('/Our-Solution')}
+                className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer flex items-center gap-1.5"
+              >
+                <span>Our Solutions</span>
+                <span className="text-[10px]">▾</span>
+              </button>
+
+              {openDropdown === 'services' && (
+                <div
+                  className="absolute left-0 top-full mt-2 w-56 rounded-none border border-white/10 bg-surface py-2 shadow-2xl z-50"
+                  onMouseEnter={() => setOpenDropdown('services')}
+                  onMouseLeave={(e) => {
+                    const next = e.relatedTarget as Node | null;
+                    if (!e.currentTarget.parentElement?.contains(next)) {
+                      setOpenDropdown(null);
+                    }
+                  }}
+                >
+                  <button
+                    onClick={() => { setOpenDropdown(null); navigate('/unified-communication'); }}
+                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary wrap-normal"
+                  >
+                    Unified Communication
+                  </button>
+                  <button
+                    onClick={() => { setOpenDropdown(null); scrollToSection('casestudies'); }}
+                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary"
+                  >
+                    Network Infrastructure
+                  </button>
+                  <button
+                    onClick={() => { setOpenDropdown(null); scrollToSection('faq'); }}
+                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary"
+                  >
+                    Cybersecurity
+                  </button>
+                  <button
+                    onClick={() => { setOpenDropdown(null); scrollToSection('faq'); }}
+                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary"
+                  >
+                    Storage, Servers, Laptops And Desktops
+                  </button>
+                  <button
+                    onClick={() => { setOpenDropdown(null); scrollToSection('faq'); }}
+                    className="block w-full px-4 py-2 text-left text-xs uppercase tracking-widest text-neutral hover:bg-white/5 hover:text-primary"
+                  >
+                    Surveillance
+                  </button>
+                </div>
+              )}
+            </div>
+
+            
             <button
               onClick={() => scrollToSection('calculator')}
               className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer flex items-center gap-1.5"
             >
-              <span>SLA Calculator</span>
               <span className="bg-accent/10 text-accent text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-none border border-accent/20 tracking-normal">
-                KPI
+                Servuc
               </span>
             </button>
             <button

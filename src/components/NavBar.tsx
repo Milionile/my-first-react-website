@@ -71,7 +71,7 @@ export default function Navbar() {
 
               {openDropdown === 'services' && (
                 <div
-                  className="absolute left-0 top-full mt-2 w-56 rounded-none border border-white/10 bg-surface py-2 shadow-2xl z-50"
+                  className="absolute left-0 top-full w-56 rounded-none border border-white/10 bg-surface py-2 shadow-2xl z-50"
                   onMouseEnter={() => setOpenDropdown('services')}
                   onMouseLeave={(e) => {
                     const next = e.relatedTarget as Node | null;
@@ -116,12 +116,12 @@ export default function Navbar() {
 
             
             <button
-              onClick={() => scrollToSection('calculator')}
+              onClick={() => scrollToSection('')}
               className="font-sans text-xs font-bold uppercase tracking-widest text-neutral hover:text-primary transition-colors cursor-pointer flex items-center gap-1.5"
             >
-              <span className="bg-accent/10 text-accent text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-none border border-accent/20 tracking-normal">
-                Servuc
-              </span>
+              
+                Services
+                
             </button>
             <button
               onClick={() => scrollToSection('casestudies')}
@@ -137,14 +137,7 @@ export default function Navbar() {
             </button>
             <div className="h-4 w-px bg-dark" />
             
-            {/* Direct Status Badge */}
-            <div className="hidden lg:flex items-center space-x-2 text-[10px] font-mono uppercase tracking-wider bg-accent/10 border border-accent/20 text-accent px-3 py-1.5 rounded-none">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent"></span>
-              </span>
-              <span>SLA Nominal</span>
-            </div>
+            
 
             <button
               onClick={() => scrollToSection('contact')}

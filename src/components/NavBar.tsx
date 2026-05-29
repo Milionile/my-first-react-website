@@ -133,7 +133,7 @@ export default function Navbar() {
             {/* Solutions Mobile Group */}
             <div className="pt-2 pb-4 border-b border-white/5">
               <div className="text-secondary/60 text-[10px] uppercase tracking-widest font-black mb-2 px-1">
-                Our Solutions
+                Our Solutions -
               </div>
               <div className="space-y-1 pl-2">
                 {SOLUTION_LINKS.map((sol) => (

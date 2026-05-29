@@ -16,8 +16,8 @@ function App() {
     <div className="min-h-screen bg-white text-neutral">
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/get-in-touch" element={<GetInTouch />} />
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/get-in-touch" element={<GetInTouch/>} />
         <Route path="/Blog" element={<Blog/>}/>
         <Route path="/CyberSecurity" element={<CyberSecurity/>}/>
         <Route path="/NetworkInfrastructure" element={<NetworkInfrastructure/>}/>

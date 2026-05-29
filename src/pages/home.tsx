@@ -1,13 +1,13 @@
 export default function HomePage() {
   return (
     <main className="pt-24">
-      <section id="hero" className="mt-1 mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-center px-6 py-16 lg:px-8">
-        <p className=" mb-2 text-lg text-bold uppercase tracking-[0.35em] text-primary">C3E IT • Enterprise support</p>
-        <h1 className="max-w-3xl text-4xl font-black tracking-tight text-black md:text-6xl lg:text-7xl">
-          Reliable IT infrastructure, made clear and easy to trust.
+      <section id="hero" className="mt-1 mx-auto flex min-h-[88vh] max-w-8xl flex-col justify-center px-6 py-16 lg:px-8">
+        <p className=" mb-1 text-lg text-bold uppercase tracking-[0.1em] text-primary">C3E Information Technology Services</p>
+        <h1 className="max-w-3xl text-left text-4xl font-black tracking-tight text-black md:text-6xl lg:text-7xl">
+          Providing intelligent communications solutions specific to your business needs
         </h1>
         <p className="mt-6 max-w-2xl text-xl text-black md:text-xl">
-          We help businesses modernize networks, secure endpoints, and keep their operations moving with practical support and transparent service levels.
+          We are formed from the core passion and commitment of continued service and support for our Enterprise Customers and the rest of the ICT market.
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
           <a href="#contact" className="rounded-3xl bg-primary px-6 py-4 text-sm font-bold uppercase tracking-[0.25em] text-dark hover:bg-secondary transition-colors">Book a consultation</a>
